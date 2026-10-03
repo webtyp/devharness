@@ -179,8 +179,11 @@ var registry = []Harness{
 		},
 	},
 	{
+		// agents is the vendor-neutral convention (~/.agents/skills) used by
+		// open-source agents (such as OpenCode) and multi-agent tools to auto-load
+		// skills without being tied to a single vendor-specific directory.
 		ID:             "agents",
-		Name:           "Agents",
+		Name:           "Agents (Vendor-neutral)",
 		SupportsSkills: true,
 		GetSkillsDir: func(homeDir string) (string, error) {
 			return filepath.Join(homeDir, ".agents", "skills"), nil
