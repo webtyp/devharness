@@ -10,8 +10,8 @@ import (
 
 func TestCatalog_All(t *testing.T) {
 	all := devharness.All()
-	if len(all) < 10 {
-		t.Fatalf("expected at least 10 harnesses, got %d", len(all))
+	if len(all) < 15 {
+		t.Fatalf("expected at least 15 harnesses, got %d", len(all))
 	}
 
 	ids := map[string]bool{}
@@ -30,6 +30,11 @@ func TestCatalog_All(t *testing.T) {
 		"agents",
 		"vscode",
 		"cursor",
+		"pi",
+		"windsurf",
+		"zed",
+		"hermes",
+		"deepseek",
 	}
 
 	for _, exp := range expected {
@@ -52,14 +57,15 @@ func TestCatalog_Skills(t *testing.T) {
 		ids[h.ID] = true
 	}
 
-	if !ids["antigravity-vsc"] {
-		t.Error("expected antigravity-vsc in Skills()")
+	for _, want := range []string{"antigravity-vsc", "pi", "hermes", "deepseek"} {
+		if !ids[want] {
+			t.Errorf("expected %s in Skills()", want)
+		}
 	}
-	if ids["vscode"] {
-		t.Error("vscode should not be in Skills()")
-	}
-	if ids["cursor"] {
-		t.Error("cursor should not be in Skills()")
+	for _, notWant := range []string{"vscode", "cursor", "windsurf", "zed"} {
+		if ids[notWant] {
+			t.Errorf("%s should not be in Skills()", notWant)
+		}
 	}
 }
 
@@ -76,14 +82,10 @@ func TestCatalog_MCP(t *testing.T) {
 		ids[h.ID] = true
 	}
 
-	if !ids["antigravity-vsc"] {
-		t.Error("expected antigravity-vsc in MCP()")
-	}
-	if !ids["vscode"] {
-		t.Error("expected vscode in MCP()")
-	}
-	if !ids["cursor"] {
-		t.Error("expected cursor in MCP()")
+	for _, want := range []string{"antigravity-vsc", "vscode", "cursor", "pi", "windsurf", "zed", "hermes", "deepseek"} {
+		if !ids[want] {
+			t.Errorf("expected %s in MCP()", want)
+		}
 	}
 	if ids["gemini"] {
 		t.Error("gemini should not be in MCP()")
@@ -104,6 +106,13 @@ func TestFind(t *testing.T) {
 		{"vsc", "vscode", false},         // Alias
 		{"vscode", "vscode", false},
 		{"cursor", "cursor", false},
+		{"pi", "pi", false},
+		{"windsurf", "windsurf", false},
+		{"zed", "zed", false},
+		{"hermes", "hermes", false},
+		{"hermes-agent", "hermes", false}, // Alias
+		{"deepseek", "deepseek", false},
+		{"deepseek-tui", "deepseek", false}, // Alias
 		{"nonexistent", "", true},
 	}
 

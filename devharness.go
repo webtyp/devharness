@@ -231,6 +231,105 @@ var registry = []Harness{
 			return (err == nil && dirExists(dir)) || dirExists(filepath.Join(homeDir, ".cursor"))
 		},
 	},
+	{
+		ID:             "pi",
+		Name:           "Pi Agent",
+		SupportsSkills: true,
+		GetSkillsDir: func(homeDir string) (string, error) {
+			return filepath.Join(homeDir, ".pi", "agent", "skills"), nil
+		},
+		SupportsMCP: true,
+		GetConfigDir: func(homeDir string) (string, error) {
+			return filepath.Join(homeDir, ".pi", "agent"), nil
+		},
+		MCP: MCPConfig{
+			FileName:     "mcp.json",
+			ServersKey:   "mcpServers",
+			URLKey:       "url",
+			SkipProfiles: true,
+		},
+		IsInstalled: func(homeDir string) bool {
+			return dirExists(filepath.Join(homeDir, ".pi")) || dirExists(filepath.Join(homeDir, ".pi", "agent"))
+		},
+	},
+	{
+		ID:          "windsurf",
+		Name:        "Windsurf",
+		SupportsMCP: true,
+		GetConfigDir: func(homeDir string) (string, error) {
+			return filepath.Join(homeDir, ".codeium", "windsurf"), nil
+		},
+		MCP: MCPConfig{
+			FileName:     "mcp_config.json",
+			ServersKey:   "mcpServers",
+			URLKey:       "serverUrl",
+			SkipProfiles: true,
+		},
+		IsInstalled: func(homeDir string) bool {
+			return dirExists(filepath.Join(homeDir, ".codeium", "windsurf"))
+		},
+	},
+	{
+		ID:          "zed",
+		Name:        "Zed",
+		SupportsMCP: true,
+		GetConfigDir: func(homeDir string) (string, error) {
+			return filepath.Join(homeDir, ".config", "zed"), nil
+		},
+		MCP: MCPConfig{
+			FileName:     "settings.json",
+			ServersKey:   "context_servers",
+			URLKey:       "url",
+			SkipProfiles: true,
+		},
+		IsInstalled: func(homeDir string) bool {
+			return dirExists(filepath.Join(homeDir, ".config", "zed"))
+		},
+	},
+	{
+		ID:             "hermes",
+		Name:           "Hermes Agent",
+		Aliases:        []string{"hermes-agent"},
+		SupportsSkills: true,
+		GetSkillsDir: func(homeDir string) (string, error) {
+			return filepath.Join(homeDir, ".hermes", "skills"), nil
+		},
+		SupportsMCP: true,
+		GetConfigDir: func(homeDir string) (string, error) {
+			return filepath.Join(homeDir, ".hermes"), nil
+		},
+		MCP: MCPConfig{
+			FileName:     "mcp.json",
+			ServersKey:   "mcpServers",
+			URLKey:       "url",
+			SkipProfiles: true,
+		},
+		IsInstalled: func(homeDir string) bool {
+			return dirExists(filepath.Join(homeDir, ".hermes"))
+		},
+	},
+	{
+		ID:             "deepseek",
+		Name:           "DeepSeek",
+		Aliases:        []string{"deepseek-tui"},
+		SupportsSkills: true,
+		GetSkillsDir: func(homeDir string) (string, error) {
+			return filepath.Join(homeDir, ".deepseek", "skills"), nil
+		},
+		SupportsMCP: true,
+		GetConfigDir: func(homeDir string) (string, error) {
+			return filepath.Join(homeDir, ".deepseek"), nil
+		},
+		MCP: MCPConfig{
+			FileName:     "mcp.json",
+			ServersKey:   "mcpServers",
+			URLKey:       "url",
+			SkipProfiles: true,
+		},
+		IsInstalled: func(homeDir string) bool {
+			return dirExists(filepath.Join(homeDir, ".deepseek"))
+		},
+	},
 }
 
 // All returns all registered harnesses.

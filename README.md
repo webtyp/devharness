@@ -28,6 +28,11 @@ Without `devharness`, both projects duplicated path resolution, VS Code profile 
 | `agents` | Agents (Vendor-neutral) | Skills | `~/.agents` | `~/.agents/skills` | Directory `~/.agents` exists |
 | `vscode` | Visual Studio Code | MCP | Platform User dir | — | VS Code User config directory exists |
 | `cursor` | Cursor | MCP | `~/.cursor` / User dir | — | `~/.cursor` or Cursor User dir exists |
+| `pi` | Pi Agent | Skills, MCP | `~/.pi/agent` | `~/.pi/agent/skills` | `~/.pi` or `~/.pi/agent` exists |
+| `windsurf` | Windsurf | MCP | `~/.codeium/windsurf` | — | Directory `~/.codeium/windsurf` exists |
+| `zed` | Zed | MCP | `~/.config/zed` | — | Directory `~/.config/zed` exists |
+| `hermes` | Hermes Agent | Skills, MCP | `~/.hermes` | `~/.hermes/skills` | Directory `~/.hermes` exists |
+| `deepseek` | DeepSeek | Skills, MCP | `~/.deepseek` | `~/.deepseek/skills` | Directory `~/.deepseek` exists |
 
 ### What is the `agents` harness?
 
